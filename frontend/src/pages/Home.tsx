@@ -1,3 +1,34 @@
+import { useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+
+const GET_COUNTRIES = gql`
+  query GetCountries {
+    countries {
+      id
+      code
+      name
+      emoji
+    }
+  }
+`;
+
 export function HomePage() {
-  return <p>You should start working here!</p>;
+  const { data, loading, error } = useQuery(GET_COUNTRIES);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return (
+    <div>
+      <h1>Countries</h1>
+      <div>
+        {data?.countries?.map((country: any) => (
+          <div key={country.id}>
+            <span>{country.emoji}</span>
+            <span>{country.name}</span>
+            <span>({country.code})</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
