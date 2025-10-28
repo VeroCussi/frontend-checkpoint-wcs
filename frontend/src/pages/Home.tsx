@@ -14,8 +14,8 @@ const GET_COUNTRIES = gql`
 
 export function HomePage() {
   const { data, loading, error } = useQuery(GET_COUNTRIES);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading) return <p>Chargement...</p>;
+  if (error) return <p>Erreur: {error.message}</p>;
 
   return (
     <div>
