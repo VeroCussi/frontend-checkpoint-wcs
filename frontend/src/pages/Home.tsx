@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";
+import { Link } from "react-router-dom";
 
 const GET_COUNTRIES = gql`
   query GetCountries {
@@ -23,12 +24,15 @@ export function HomePage() {
       <div>
         {data?.countries?.map((country: any) => (
           <div key={country.id}>
-            <span>{country.emoji}</span>
-            <span>{country.name}</span>
-            <span>({country.code})</span>
+            <Link to={`/countries/${country.code}`}>
+              <span>{country.emoji}</span>
+              <span>{country.name}</span>
+              <span>({country.code})</span>
+            </Link>
           </div>
         ))}
       </div>
+      <Link to="/add-country">+ Ajouter un pays</Link>
     </div>
   );
 }
